@@ -1,0 +1,38 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Tweet</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Twitterid</th>
+                <td>{{ entity.twitterId }}</td>
+            </tr>
+            <tr>
+                <th>Lang</th>
+                <td>{{ entity.lang }}</td>
+            </tr>
+            <tr>
+                <th>Displayurl</th>
+                <td>{{ entity.displayUrl }}</td>
+            </tr>
+            <tr>
+                <th>Creationdate</th>
+                <td>{{ entity.creationDate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('tweet') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>
+{% endblock %}

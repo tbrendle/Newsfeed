@@ -1,0 +1,43 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Tweet list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Twitterid</th>
+                <th>Text</th>
+                <th>Rtcount</th>
+                <th>Favcount</th>
+                <th>Lang</th>
+                <th>Displayurl</th>
+                <th>Creationdate</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('tweet_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.twitterId }}</td>
+                <td>{{ entity.text }}</td>
+                <td>{{ entity.rtCount }}</td>
+                <td>{{ entity.favCount }}</td>
+                <td>{{ entity.lang }}</td>
+                <td>{{ entity.displayUrl }}</td>
+                <td>{% if entity.creationDate %}{{ entity.creationDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('tweet_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% endblock %}
