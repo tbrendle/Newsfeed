@@ -15,6 +15,7 @@ parameters:
     oauth_access_token_secret: secret
     consumer_key: key
     consumer_secret: csecret
+    admin_password: yourPassWordBCrypt12Encoded
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt

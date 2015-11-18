@@ -13,7 +13,7 @@ use AppBundle\Form\AuthorType;
 /**
  * Author controller.
  *
- * @Route("/author")
+ * @Route("/admin/author")
  */
 class AuthorController extends Controller
 {

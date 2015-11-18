@@ -12,7 +12,7 @@ use AppBundle\Entity\Tweet;
 /**
  * Tweet controller.
  *
- * @Route("/tweet")
+ * @Route("/admin/tweet")
  */
 class TweetController extends Controller
 {
