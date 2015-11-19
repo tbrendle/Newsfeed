@@ -23,7 +23,10 @@
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
     },
-    "scripts": {
+    "scripts": {"scripts": {
+        "pre-install-cmd": [
+            "AppBundle\\HerokuDatabase::populateEnvironment"
+        ],
         "post-install-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
