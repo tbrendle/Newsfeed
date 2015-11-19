@@ -1,5 +1,5 @@
 <?php 
-$db = parse_url($container->getParameter('DATABASE_URL')?:'mysql://root@localhost/symfony');
+$db = parse_url($container->getParameter('DATABASE_URL')?:'postgres://jjvhdirzunlfhh:viGCzzAMpVEdetbRGnwAWigDKd@ec2-54-83-199-54.compute-1.amazonaws.com:5432/d5jt81oobt993g');
 if($db['scheme']=='postgres')
 	$container->setParameter('database_driver', 'pdo_pgsql' );
 else
