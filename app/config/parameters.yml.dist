@@ -8,7 +8,6 @@ parameters:
     database_user: jjvhdirzunlfhh
     database_password: viGCzzAMpVEdetbRGnwAWigDKd
     database_driver: pdo_pgsql
-    database_url: postgres://jjvhdirzunlfhh:viGCzzAMpVEdetbRGnwAWigDKd@ec2-54-83-199-54.compute-1.amazonaws.com:5432/d5jt81oobt993g
     mailer_transport: smtp
     mailer_host: 127.0.0.1
     mailer_user: null

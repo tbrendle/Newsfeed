@@ -50,14 +50,6 @@
         "symfony-assets-install": "relative",
         "incenteev-parameters": {
             "file": "app/config/parameters.yml",
-            "env-map": {
-                "database_url": "DATABASE_URL",
-                "oauth_access_token": "OAUTH_ACCESS_TOKEN",
-                "oauth_access_token_secret": "OAUTH_ACCESS_TOKEN_SECRET",
-                "consumer_key": "CONSUMER_KEY",
-                "consumer_secret": "CONSUMER_SECRET",
-                "admin_password": "ADMIN_PASSWORD"
-            }
         }
     }
 }
