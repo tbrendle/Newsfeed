@@ -49,7 +49,19 @@
         "symfony-web-dir": "web",
         "symfony-assets-install": "relative",
         "incenteev-parameters": {
-            "file": "app/config/parameters.yml"
+            "file": "app/config/parameters.yml",
+            "env-map": {
+                "database_host": "DATABASE_HOST",
+                "database_port": "DATABASE_PORT",
+                "database_name": "DATABASE_NAME",
+                "database_user": "DATABASE_USER",
+                "database_password": "DATABASE_PASSWORD",
+                "oauth_access_token": "OAUTH_ACCESS_TOKEN",
+                "oauth_access_token_secret": "OAUTH_ACCESS_TOKEN_SECRET",
+                "consumer_key": "CONSUMER_KEY",
+                "consumer_secret": "CONSUMER_SECRET",
+                "admin_password": "ADMIN_PASSWORD"
+            }
         }
     }
 }
