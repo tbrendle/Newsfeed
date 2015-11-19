@@ -1,8 +1,10 @@
 <?php 
 
 $db = parse_url(getenv('DATABASE_URL')?:'mysql://root@localhost/symfony');
-
-$container->setParameter('database_driver', (isset($db['scheme']) ? $db['scheme'] : 'mysql') );
+if($db['scheme']=='postgres')
+	$container->setParameter('database_driver', 'pdo_pgsql' );
+else
+	$container->setParameter('database_driver', 'pdo_mysql' );
 $container->setParameter('database_user', (isset($db['user']) ? $db['user'] : 'root'));
 $container->setParameter('database_password', (isset($db['pass']) ? $db['pass'] : null));
 $container->setParameter('database_host', (isset($db['hotst']) ? $db['host'] : 'localhost'));
