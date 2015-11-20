@@ -38,7 +38,29 @@ class DefaultController extends Controller
         $response->headers->set('Content-Type', 'application/json');
         return $response;
     }
-
+    /**
+    * Lists all tweets after or before some point
+    *
+    * @Route("/api/{id}/{border}", name="api_last")
+    * @Method("GET")
+    */
+    public function getLastAction($id, $border)
+    {
+        $em = $this->getDoctrine()->getManager();
+        if($border==='asc')
+            $border = '>';
+        elseif ($border==='desc') {
+            $border = '<';
+        } else {
+            $response = new Response('[]');
+            $response->headers->set('Content-Type', 'application/json');
+            return $response;
+        }
+        $tweets= $em->getRepository('AppBundle:Tweet')->findLastTweets($id, $border);
+        $response = new Response(json_encode($tweets));
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
     /**
      * Lists all tweets.
      *
