@@ -33,7 +33,6 @@ class DefaultController extends Controller
             10,
             0
             );
-        
         $response = new Response(json_encode($tweets));
         $response->headers->set('Content-Type', 'application/json');
         return $response;
@@ -72,12 +71,12 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         
-        $tweets= $em->getRepository('AppBundle:Tweet')->findBy(
+        $tweets= [];/*$em->getRepository('AppBundle:Tweet')->findBy(
             array(),
             array('creationDate'=>'DESC'),
             10,
             0
-            );
+            );*/
         
         return array('tweets'=>$tweets);
     }

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Awesome App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap -->
+  {% block stylesheets %}
+  {% stylesheets
+    '@AppBundle/Resources/public/css/style.css'
+  %}
+  <link rel="stylesheet" href="{{ asset_url }}" />
+  {% endstylesheets %}
+  {% endblock %}
+</head>
+
+<body ng-app='twApp'>
+  {% block body %}
+  {% endblock %}
+  <script src="https://platform.twitter.com/widgets.js"></script>
+  {% block javascript %}
+    {% javascripts
+      '@AppBundle/Resources/public/js/angular.min.js'   
+      '@AppBundle/Resources/public/js/app.js'
+    %}
+      <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+  {% endblock %}
+</body>
+</html>

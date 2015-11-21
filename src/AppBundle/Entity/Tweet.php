@@ -76,13 +76,10 @@ class Tweet implements JsonSerializable
     {
         return array(
             'lang'=>$this->lang,
-            'favCount'=>$this->favCount,
             'displayUrl'=>$this->displayUrl,
             'creationDate'=>$this->creationDate,
             'author'=>$this->author,
-            'rtCount'=>$this->rtCount,
             'id'=>$this->twitterId,
-            'text'=>$this->text
         );
     }
 
