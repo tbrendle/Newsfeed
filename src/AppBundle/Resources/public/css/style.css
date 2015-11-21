@@ -1,0 +1,49 @@
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
+}
+
+.banner{
+    font: 16px/1.4 Helvetica, Roboto, 'Segoe UI', Calibri, sans-serif;
+    width: calc(100% - 2px);
+    max-width: 498px;
+    min-width: 218px;
+    padding-top: 14.400px;
+    padding-bottom: 14.400px;
+    background-color: pink;
+    color: #F94C86;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    border: 1px solid #F94C86;
+    transition: all 1s ease;
+    font-size: 0.875rem;
+    font-weight: 700;
+    border-radius: 4px;
+    cursor: auto;
+}
+
+.banner-top:hover{
+	background-color:#F94C86;
+	cursor: pointer;
+	color:white;
+}
+
+.banner-bottom{
+	background-color:#F94C86;
+	color:white;
+}
+
+.tabard{
+    max-width: 500px;
+    width: 100%;
+    margin: auto;
+}
+
+iframe {
+	margin-left: auto;
+    margin-right: auto;
+}
+
+body{
+	background-color: pink;
+}

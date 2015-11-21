@@ -16,7 +16,7 @@ class TwitterProvider
 	public function getTweets($id)
 	{
 		$url = "https://api.twitter.com/1.1/statuses/user_timeline.json";
-		$getfield = '?screen_name='.$id.'&count=20&include_rts=false';
+		$getfield = '?screen_name='.$id.'&count=20';
 		$twitter = new TwitterAPIExchange($this->settings);
 		return json_decode($twitter->setGetfield($getfield)
 		             ->buildOauth($url, "GET")

@@ -1,28 +1,39 @@
 var myApp = angular.module('twApp',[]);
 
-myApp.controller('TwitterController', ['$scope', '$http', '$timeout', function($scope, $http, $timeout) {
+myApp.controller('TwitterController', ['$scope', '$http', '$timeout', '$window',  function($scope, $http, $timeout, $window) {
   $scope.firstId=null;
   $scope.lastId=null;
   $scope.tweets=[];
+  $scope.loading = true;
   $scope.load=false;
   $scope.bufferTop = [];
   $http.get('/api').success(function(result){
     $scope.tweets = result;
-    console.log($scope.tweets[0]);
-    console.log($scope.tweets[$scope.tweets.length-1]);
     $scope.load =true;
     $timeout(function () {
       twttr.widgets.load();
+      $scope.loading = false;
     }, 30);
   });
+
+  $window.onscroll = function(ev) {
+    console.log('scroll');
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight  && !$scope.loading) {
+      $scope.loading=true;
+      $scope.bottom();
+    } 
+  }; 
   $scope.bottom = function(){
     if($scope.tweets.length>0)
     $http.get('/api/'+$scope.tweets[$scope.tweets.length-1].id+'/desc').success(function(result){
       $scope.tweets = $scope.tweets.concat(result);
       $timeout(function () {
         twttr.widgets.load();
+        $scope.loading = false;
       }, 30);
     });
+    else
+      $scope.loading = false;
   };
   $scope.watchtop = function(){
     console.log(('watchtop begin'));

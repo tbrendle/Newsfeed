@@ -1,10 +1,13 @@
 {% extends 'AppBundle::base.html.twig' %}
 
 {% block body %}
-  <div ng-app='twApp' ng-controller='TwitterController' align='center' style="padding-top: 100px;">
-    {{"{{bufferTop.length}}"}}
-    <button ng-click="buff()">BUFF</button>
-    <button ng-click="bottom()">BOTTOM LOAD</button>
+  <div ng-app='twApp' ng-controller='TwitterController' ng-cloak>
+  	<div class="tabard">
+  	<div class='banner banner-top' ng-click="buff()" ng-show="bufferTop.length">
+  		See {{'{{bufferTop.length}}'}} new tweet{{"{{(bufferTop.length > 1) ? 's' : '' }}"}}
+  	</div>
     <div template show="load"></div>
+    <div class='banner banner-bottom' ng-show="loading">Loading...</div>
+    </div>
   </div>
 {% endblock %}

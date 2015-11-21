@@ -220,6 +220,10 @@ class AuthorController extends Controller
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Author entity.');
             }
+            $tweets=$entity->getTweets();
+            foreach ($tweets as $tweet) {
+                $em->remove($tweet);
+            }
 
             $em->remove($entity);
             $em->flush();
