@@ -25,13 +25,15 @@ myApp.controller('TwitterController', ['$scope', '$http', '$timeout', function($
     });
   };
   $scope.watchtop = function(){
+    console.log(('watchtop begin'));
     var id = '';
     if($scope.bufferTop.length>0)
       id = $scope.bufferTop[0].id;
     else if ($scope.tweets.length>0)
-      id = $scope.tweets.length;
+      id = $scope.tweets[0].id;
     if(id.length>0)
-      $http.get('/api/'+$scope.tweets[0].id+'/asc').success(function(result){
+      $http.get('/api/'+id+'/asc').success(function(result){
+        console.log(result);
         $scope.bufferTop = result.concat($scope.bufferTop);
         $timeout(function(){
           $scope.watchtop();
@@ -39,6 +41,7 @@ myApp.controller('TwitterController', ['$scope', '$http', '$timeout', function($
       });
     else
       $timeout(function(){
+          console.log(('timeouted'));
           $scope.watchtop();
       }, 10000);
   };
