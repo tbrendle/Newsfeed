@@ -39,6 +39,10 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+        ],
+        "compile": [
+          "rm web/app_dev.php",
+          "php app/console assetic:dump --no-debug"
         ]
     },
     "config": {

@@ -13,8 +13,7 @@ imports:
 #        metadata_cache_driver: apc
 #        result_cache_driver: apc
 #        query_cache_driver: apc
-assetic:
-    write_to: "web"
+
 monolog:
     handlers:
         main:
