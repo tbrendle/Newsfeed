@@ -18,7 +18,7 @@ class TweetRepository extends \Doctrine\ORM\EntityRepository
 	    $qb->where('a.twitterId'.$order.':border');
 	    $qb->andWhere('auth.type = :typeId');
 	    $qb->orderBy('a.creationDate', 'DESC');
-	    $qb->setMaxResults(10);
+	    $qb->setMaxResults(4);
 	    $qb->setParameter('border', $border);
 	    $qb->setParameter('typeId', $typeId);
 	    return $qb->getQuery()->getResult();
@@ -29,7 +29,7 @@ class TweetRepository extends \Doctrine\ORM\EntityRepository
 	    $qb->join('a.author', 'auth');
 	    $qb->where('auth.type = :typeId');
 	    $qb->orderBy('a.creationDate', 'DESC');
-	    $qb->setMaxResults(10);
+	    $qb->setMaxResults(4);
 	    $qb->setParameter('typeId', $typeId);
 	    return $qb->getQuery()->getResult();
 	}

@@ -1,20 +1,3 @@
-window.twttr = (function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0],
-    t = window.twttr || {};
-  if (d.getElementById(id)) return t;
-  js = d.createElement(s);
-  js.id = id;
-  js.src = "https://platform.twitter.com/widgets.js";
-  fjs.parentNode.insertBefore(js, fjs);
-
-  t._e = [];
-  t.ready = function(f) {
-    t._e.push(f);
-  };
-
-  return t;
-}(document, "script", "twitter-wjs"));
-
 var myApp = angular.module('twApp',[]);
 
 myApp.controller('TwitterController', ['$scope', '$http', '$timeout', '$window', '$document',  function($scope, $http, $timeout, $window, $document) {
@@ -27,7 +10,7 @@ myApp.controller('TwitterController', ['$scope', '$http', '$timeout', '$window',
     $scope.tw.push([]);
     $scope.bufferTop.push([]);
   }
-  $scope.writeTweet = function(tweet){
+ $scope.writeTweet = function(tweet){
     if($scope.alreadyDisplayed[tweet.id]===undefined){
       $scope.alreadyDisplayed[tweet.id]=true;
       return '<blockquote class="twitter-tweet"><a href="https://twitter.com/'+tweet.author.id+'/status/'+tweet.id+'"></a></blockquote>';
@@ -35,8 +18,8 @@ myApp.controller('TwitterController', ['$scope', '$http', '$timeout', '$window',
       console.log("Warning:tweet from"+tweet.author.id+" of id "+tweet.id+" already displayed");
       return "";
     }
-
   }
+
   $scope.addElements = function(type, tweets, top){
     var el = angular.element(document.getElementById("tweetArea"+(type-1)));
     console.log(tweets)
@@ -44,7 +27,7 @@ myApp.controller('TwitterController', ['$scope', '$http', '$timeout', '$window',
     if(!top){
       $scope.tw[type-1] = $scope.tw[type-1].concat(tweets);
       for (var i = 0; i < len; i++) {
-        el.append($scope.writeTweet(tweets[i]))
+        el.append($scope.writeTweet(tweets[i]));
       }
     } else {
       $scope.tw[type-1] = tweets.concat($scope.tw[type-1]);
@@ -57,7 +40,7 @@ myApp.controller('TwitterController', ['$scope', '$http', '$timeout', '$window',
   $scope.loading = true;
   for (var i = 1; i <= $scope.typeCount; i++) {
     (function(index){
-      $http.get('/twitter-app/web/app_dev.php/api/'+index).success(function(result){
+      $http.get('/api/'+index).success(function(result){
         $scope.addElements(index, result);
         $scope.loading = false;
     });})(i)
@@ -80,7 +63,7 @@ myApp.controller('TwitterController', ['$scope', '$http', '$timeout', '$window',
   $scope.bottom = function(type){
     if($scope.tw[type-1].length>0){
       console.log("CALLING bottom")
-      $http.get('/twitter-app/web/app_dev.php/api/'+type+'/'+$scope.tw[type-1][$scope.tw[type-1].length-1].id+'/desc').success(function(result){
+      $http.get('/api/'+type+'/'+$scope.tw[type-1][$scope.tw[type-1].length-1].id+'/desc').success(function(result){
         $scope.addElements(type, result);
         $timeout(function(){
           $scope.loading = false;
@@ -96,7 +79,7 @@ myApp.controller('TwitterController', ['$scope', '$http', '$timeout', '$window',
     else if ($scope.tw[type-1].length>0)
       id = $scope.tw[type-1][0].id;
     if(id.length>0)
-      $http.get('/twitter-app/web/app_dev.php/api/'+type+'/'+id+'/asc').success(function(result){
+      $http.get('/api/'+type+'/'+id+'/asc').success(function(result){
         console.log(result);
         $scope.bufferTop[type-1] = result.concat($scope.bufferTop[type-1]);
         $timeout(function(){
