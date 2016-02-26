@@ -10,13 +10,27 @@ namespace AppBundle\Entity;
  */
 class TweetRepository extends \Doctrine\ORM\EntityRepository
 {
-	public function findLastTweets($border, $order)
+	public function findLastTweets($border, $order, $typeId)
 	{
 	    $qb = $this->createQueryBuilder('a');
+
+	    $qb->join('a.author', 'auth');
 	    $qb->where('a.twitterId'.$order.':border');
+	    $qb->andWhere('auth.type = :typeId');
 	    $qb->orderBy('a.creationDate', 'DESC');
 	    $qb->setMaxResults(10);
 	    $qb->setParameter('border', $border);
+	    $qb->setParameter('typeId', $typeId);
+	    return $qb->getQuery()->getResult();
+	}
+	public function findByAuthorType($typeId)
+	{
+	    $qb = $this->createQueryBuilder('a');
+	    $qb->join('a.author', 'auth');
+	    $qb->where('auth.type = :typeId');
+	    $qb->orderBy('a.creationDate', 'DESC');
+	    $qb->setMaxResults(10);
+	    $qb->setParameter('typeId', $typeId);
 	    return $qb->getQuery()->getResult();
 	}
 }

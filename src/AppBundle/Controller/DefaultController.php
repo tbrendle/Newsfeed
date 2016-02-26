@@ -20,19 +20,14 @@ class DefaultController extends Controller
      /**
      * Lists all tweets.
      *
-     * @Route("/api", name="api_main")
+     * @Route("/api/{typeId}", name="api_main")
      * @Method("GET")
      */
-    public function getAction()
+    public function getAction($typeId)
     {
         $em = $this->getDoctrine()->getManager();
         
-        $tweets= $em->getRepository('AppBundle:Tweet')->findBy(
-            array(),
-            array('creationDate'=>'DESC'),
-            10,
-            0
-            );
+        $tweets= $em->getRepository('AppBundle:Tweet')->findByAuthorType($typeId);
         $response = new Response(json_encode($tweets));
         $response->headers->set('Content-Type', 'application/json');
         return $response;
@@ -40,10 +35,10 @@ class DefaultController extends Controller
     /**
     * Lists all tweets after or before some point
     *
-    * @Route("/api/{id}/{border}", name="api_last")
+    * @Route("/api/{typeId}/{id}/{border}", name="api_last")
     * @Method("GET")
     */
-    public function getLastAction($id, $border)
+    public function getLastAction($id, $border, $typeId)
     {
         $em = $this->getDoctrine()->getManager();
         if($border==='asc')
@@ -55,7 +50,7 @@ class DefaultController extends Controller
             $response->headers->set('Content-Type', 'application/json');
             return $response;
         }
-        $tweets= $em->getRepository('AppBundle:Tweet')->findLastTweets($id, $border);
+        $tweets= $em->getRepository('AppBundle:Tweet')->findLastTweets($id, $border, $typeId);
         $response = new Response(json_encode($tweets));
         $response->headers->set('Content-Type', 'application/json');
         return $response;

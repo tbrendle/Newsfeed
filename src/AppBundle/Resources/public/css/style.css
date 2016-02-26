@@ -2,6 +2,49 @@
   display: none !important;
 }
 
+.style-2 .banner{
+    color: #F94C86;
+    border-color: #F94C86;
+    background-color: pink;
+}
+
+.style-2 .banner-top:hover{
+    background-color:#F94C86;
+    cursor: pointer;
+    color:white;
+}
+
+.style-2 .banner-bottom{
+    background-color:#F94C86;
+    color:white;
+}
+
+.style-2{
+    background-color: pink;
+}
+
+
+.style-1 .banner{
+    color: rgb(85, 172, 238);
+    border-color: rgb(85, 172, 238);
+    background-color: white;
+}
+
+.style-1 .banner-top:hover{
+    background-color:rgb(85, 172, 238);
+    cursor: pointer;
+    color:white;
+}
+
+.style-1 .banner-bottom{
+    background-color:rgb(85, 172, 238);
+    color:white;
+}
+
+.style-1{
+    background-color: #f5f8fa;
+}
+
 .banner{
     font: 16px/1.4 Helvetica, Roboto, 'Segoe UI', Calibri, sans-serif;
     width: calc(100% - 2px);
@@ -9,34 +52,36 @@
     min-width: 218px;
     padding-top: 14.400px;
     padding-bottom: 14.400px;
-    background-color: pink;
-    color: #F94C86;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
-    border: 1px solid #F94C86;
-    transition: all 1s ease;
+    border: 1px solid;
+    transition: all 0.5s ease;
     font-size: 0.875rem;
     font-weight: 700;
     border-radius: 4px;
     cursor: auto;
 }
 
-.banner-top:hover{
-	background-color:#F94C86;
-	cursor: pointer;
-	color:white;
-}
-
-.banner-bottom{
-	background-color:#F94C86;
-	color:white;
+.banner-fixed{
+    position: fixed;
+    top: 0;
+    margin-right: 25px;
+    width: 100%;
+    left: 0;
+    max-width: 100%;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-radius: 0;
+    cursor: pointer;
 }
 
 .tabard{
     max-width: 500px;
     width: 100%;
     margin: auto;
+    margin-top: 60px;
 }
 
 iframe {
@@ -44,6 +89,3 @@ iframe {
     margin-right: auto;
 }
 
-body{
-	background-color: pink;
-}

@@ -13,7 +13,7 @@
   {% endblock %}
 </head>
 
-<body ng-app='twApp'>
+<body ng-app='twApp' ng-controller='TwitterController' class="style-{{"{{currentType}}"}}">
   {% block body %}
   {% endblock %}
   <script src="https://platform.twitter.com/widgets.js"></script>
