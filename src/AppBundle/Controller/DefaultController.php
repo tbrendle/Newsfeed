@@ -11,9 +11,9 @@ use AppBundle\Entity\Tweet;
 use AppBundle\Entity\TweetRepository;
 use AppBundle\Entity\Author;
 use AppBundle\Entity\AuthorRepository;
+use AppBundle\Entity\Visitor;
 use AppBundle\Utils\TwitterAPIExchange;
 use Symfony\Component\HttpFoundation\Response;
-
 class DefaultController extends Controller
 {
 
@@ -62,10 +62,18 @@ class DefaultController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        
+        $visitor = $em->getRepository('AppBundle:Visitor')->findOneByIp($request->getClientIp());
+        if(!$visitor){
+            $visitor = new Visitor();
+            $visitor->setIp($request->getClientIp());
+            $visitor->setNVisits(0);
+            $em->persist($visitor);
+        }
+        $visitor->setNVisits($visitor->getNVisits()+1);
+        $em->flush();
         $tweets= [];/*$em->getRepository('AppBundle:Tweet')->findBy(
             array(),
             array('creationDate'=>'DESC'),

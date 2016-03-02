@@ -17,7 +17,6 @@ class UpdateCommand extends ContainerAwareCommand
     }
 
     protected function updateItems($em, $ar, $settings, $limit, $output){
-
         $authors= $ar->findBy(
             array(),
             array('updateDate'=>'ASC'),
@@ -28,7 +27,7 @@ class UpdateCommand extends ContainerAwareCommand
         foreach ($authors as $author) {
             $lastUp = $now->getTimestamp()-$author->getUpdateDate()->getTimestamp();
             if($lastUp>120){
-                $output->writeln("Updating : ".$author->getTwitterId());
+                $output->writeln(memory_get_usage()."Updating : ".$author->getTwitterId());
                 try{
                     $ar->update($author->getTwitterId(), $em, $settings);
                 }
@@ -41,10 +40,10 @@ class UpdateCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-
-        $output->writeln("Starting update...");
         $em = $this->getContainer()->get('doctrine')->getManager();
+        $em->getConnection()->getConfiguration()->setSQLLogger(null);
         $ar = $em->getRepository('AppBundle:Author');
+        $output->writeln("Starting update...");
         $params=['oauth_access_token','oauth_access_token_secret','consumer_key','consumer_secret'];
         $settings = array();
         foreach ($params as $p) {
@@ -53,13 +52,14 @@ class UpdateCommand extends ContainerAwareCommand
         $twitterRequests = 0;
         while(1){
             $before = new \DateTime();
-            $this->updateItems($em, $ar, $settings, 5, $output);
+            $this->updateItems($em, $ar, $settings, 10, $output);
             $after = new \DateTime();
             $delta = $after->getTimestamp()-$before->getTimestamp();
             if($delta <25){
-                $output->writeln("Sleeping ".(25-$delta)."s...");
+                $output->writeln( memory_get_usage()."Sleeping ".(25-$delta)."s...");
                 sleep(25-$delta);
             }
+            gc_collect_cycles();
         }
     }
 }

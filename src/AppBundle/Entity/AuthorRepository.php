@@ -14,8 +14,6 @@ class AuthorRepository extends \Doctrine\ORM\EntityRepository
     public function update($name, $em, $settings)
     {
     	$author = $this->findOneByTwitterId($name);
-    	if(!$author)
-    		return null;
     	$twp = new TwitterProvider($settings);
     	$tr=$em->getRepository('AppBundle:Tweet');
         $authorTweets = $twp->getTweets($name);
@@ -31,6 +29,6 @@ class AuthorRepository extends \Doctrine\ORM\EntityRepository
         }
         $author->setUpdateDate(new \DateTime());
         $em->flush();
-        return $author;
+        $em->clear();
     }
 }
