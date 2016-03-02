@@ -65,10 +65,11 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $visitor = $em->getRepository('AppBundle:Visitor')->findOneByIp($request->getClientIp());
+        $ip = getenv('HTTP_CLIENT_IP')?:getenv('HTTP_X_FORWARDED_FOR')?:getenv('HTTP_X_FORWARDED')?:getenv('HTTP_FORWARDED_FOR')?:getenv('HTTP_FORWARDED')?:getenv('REMOTE_ADDR');
+        $visitor = $em->getRepository('AppBundle:Visitor')->findOneByIp($ip);
         if(!$visitor){
             $visitor = new Visitor();
-            $visitor->setIp($request->getClientIp());
+            $visitor->setIp($ip);
             $visitor->setNVisits(0);
             $em->persist($visitor);
         }
