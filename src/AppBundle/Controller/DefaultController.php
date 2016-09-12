@@ -58,7 +58,7 @@ class DefaultController extends Controller
     /**
      * Lists all tweets.
      *
-     * @Route("/index", name="index")
+     * @Route("/", name="index")
      * @Method("GET")
      * @Template()
      */
